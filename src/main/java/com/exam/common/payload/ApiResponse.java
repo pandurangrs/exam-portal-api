@@ -1,15 +1,18 @@
-package com.exam.payload;
+package com.exam.common.payload;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Setter
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class ApiResponse {
-	private String messsage;
+	private String message;
+
 	private boolean success;
 }
