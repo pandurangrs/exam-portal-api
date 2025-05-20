@@ -5,6 +5,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.exam.common.constant.AppConstant;
+import com.exam.common.constant.RoleStatus;
 import com.exam.common.entity.Role;
 import com.exam.common.repo.RoleRepository;
 
@@ -18,6 +20,10 @@ public class CommonDaoImpl implements CommonDao {
 
 	public Role saveRole(Role userRole) {
 		return roleRepository.save(userRole);
+	}
+	
+	public Role getRole() {
+		return roleRepository.findByRoleId(AppConstant.ROLE_NORMAL);
 	}
 
 }

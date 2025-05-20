@@ -1,16 +1,15 @@
 package com.exam.user.service;
 
 import java.util.List;
-import java.util.Set;
 
+import com.exam.common.entity.Role;
 import com.exam.user.dto.UserDto;
-import com.exam.user.entity.UserRole;
 import com.exam.user.model.UserModel;
 
 public interface UserService {
 
 	// Add User
-	UserModel addUser(UserDto userDto,Set<UserRole> userRole);
+	UserModel addUser(UserDto userDto,Role role);
 
 	// get Single User
 	UserModel getSingleUser(String userUuid);

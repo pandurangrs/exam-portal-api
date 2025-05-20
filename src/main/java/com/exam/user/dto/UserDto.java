@@ -1,10 +1,5 @@
 package com.exam.user.dto;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import com.exam.user.entity.UserRole;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,6 +22,4 @@ public class UserDto {
 	private String email;
 
 	private String address;
-	
-	private Set<UserRole> userRoles = new HashSet<>();
 }

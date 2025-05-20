@@ -1,8 +1,5 @@
 package com.exam.user.controller;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.exam.common.constant.UrlMapping;
+import com.exam.common.dao.CommonDao;
+import com.exam.common.entity.Role;
 import com.exam.user.dto.UserDto;
-import com.exam.user.entity.UserRole;
 import com.exam.user.model.UserModel;
 import com.exam.user.service.UserService;
 
@@ -30,11 +28,13 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
+	@Autowired
+	private CommonDao commonDao;
+
 	@PostMapping(UrlMapping.USERS)
 	public ResponseEntity<UserModel> saveUser(@RequestBody UserDto userDto) {
-		Set<UserRole> userRole=new HashSet<>();
-		
-		UserModel userModel = userService.addUser(userDto,userRole);
+		Role role = commonDao.getRole();
+		UserModel userModel = userService.addUser(userDto, role);
 		return new ResponseEntity<>(userModel, HttpStatus.CREATED);
 	}
 

@@ -11,21 +11,23 @@ import javax.persistence.ManyToOne;
 import com.exam.common.entity.Role;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
-@Data
+@Getter
+@Setter
 public class UserRole {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long userRoleId;
+	private Long id;
 
 	// user
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
 
 	@ManyToOne
-	@JoinColumn(name="role_id")
+	@JoinColumn(name = "role_id")
 	private Role role;
 }

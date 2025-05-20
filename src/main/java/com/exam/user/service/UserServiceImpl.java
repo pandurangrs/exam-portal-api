@@ -1,5 +1,6 @@
 package com.exam.user.service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -11,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.exam.common.dao.CommonDao;
+import com.exam.common.entity.Role;
 import com.exam.common.exception.CustomException;
 import com.exam.common.mapper.Mapper;
 import com.exam.user.dao.UserDao;
@@ -35,7 +37,7 @@ public class UserServiceImpl implements UserService {
 
 	// add User
 	@Override
-	public UserModel addUser(UserDto userDto, Set<UserRole> userRole) {
+	public UserModel addUser(UserDto userDto, Role role) {
 		logger.info("calling addUser Service {}", userDto);
 
 		if (userDao.exitByUserName(userDto.getUserName())) {
@@ -43,12 +45,15 @@ public class UserServiceImpl implements UserService {
 			throw new CustomException("User already there !!", HttpStatus.INTERNAL_SERVER_ERROR);
 		} else {
 			User user = mapper.convert(userDto, User.class);
+			user.setUuid(UUID.randomUUID().toString());			
+			
+			Set<UserRole> userRoleSet = new HashSet<>();
+			UserRole userRole = new UserRole();
+			userRole.setRole(role);
+			userRole.setUser(user);
+			userRoleSet.add(userRole);
 
-			for (UserRole ur : userRole) {
-				commonDao.saveRole(ur.getRole());
-			}
-			user.setUserRoles(userRole);
-			user.setUuid(UUID.randomUUID().toString());
+			user.getUserRoles().addAll(userRoleSet);
 			return mapper.convert(userDao.saveUser(user), UserModel.class);
 		}
 
