@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.exam.common.constant.UrlMapping;
+import com.exam.common.entity.Role;
+import com.exam.common.repo.RoleRepository;
 import com.exam.user.dto.UserDto;
 import com.exam.user.entity.UserRole;
 import com.exam.user.model.UserModel;
@@ -29,11 +31,19 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private RoleRepository roleRepository;
 
 	@PostMapping(UrlMapping.USERS)
 	public ResponseEntity<UserModel> saveUser(@RequestBody UserDto userDto) {
 		Set<UserRole> userRole=new HashSet<>();
-		
+		if(userDto.getUserRoles().isEmpty()) {
+			Role role=roleRepository.findByRoleId(2L);
+			UserRole userR=new UserRole();
+			userR.setRole(role);
+			userRole.add(userR);
+		}
 		UserModel userModel = userService.addUser(userDto,userRole);
 		return new ResponseEntity<>(userModel, HttpStatus.CREATED);
 	}

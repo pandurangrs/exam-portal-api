@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.exam.common.dao.CommonDao;
+import com.exam.common.entity.Role;
 import com.exam.common.exception.CustomException;
 import com.exam.common.mapper.Mapper;
 import com.exam.user.dao.UserDao;
@@ -45,8 +46,11 @@ public class UserServiceImpl implements UserService {
 			User user = mapper.convert(userDto, User.class);
 
 			for (UserRole ur : userRole) {
-				commonDao.saveRole(ur.getRole());
+				Role saveRole = commonDao.saveRole(ur.getRole());
+				ur.setUser(user);
 			}
+			
+			
 			user.setUserRoles(userRole);
 			user.setUuid(UUID.randomUUID().toString());
 			return mapper.convert(userDao.saveUser(user), UserModel.class);

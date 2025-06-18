@@ -40,30 +40,30 @@ public class ExamPortalApiApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		logger.info("Starting exam portal ...............");
 
-		UserDto userDto = new UserDto();
-		userDto.setFirstName("Pandurang");
-		userDto.setLastName("Shinde");
-		userDto.setUserName("pandurangrs");
-		userDto.setPassword("Pandurang@190");
-		userDto.setEmail("pandurang@gmail.com");
-		userDto.setPhone("7083021253");
-		userDto.setAddress("Pune");
-
-		User user = mapper.convert(userDto, User.class);
-		
-		Role role=new Role();
-		role.setRoleName("ADMIN");
-		
-		Set<UserRole> userRole=new HashSet<>();
-		UserRole uRole=new UserRole();
-		uRole.setRole(role);
-		uRole.setUser(user);
-		userRole.add(uRole);
-		
-		
-		userDto.setUserRoles(userRole);
-		UserModel userModel=userService.addUser(userDto, userRole);
-		logger.info("User Added Sucessfully. {}",userModel);
+//		UserDto userDto = new UserDto();
+//		userDto.setFirstName("Pandurang");
+//		userDto.setLastName("Shinde");
+//		userDto.setUserName("pandurangrs");
+//		userDto.setPassword("Pandurang@190");
+//		userDto.setEmail("pandurang@gmail.com");
+//		userDto.setPhone("7083021253");
+//		userDto.setAddress("Pune");
+//
+//		User user = mapper.convert(userDto, User.class);
+//		
+//		Role role=new Role();
+//		role.setRoleName("ADMIN");
+//		
+//		Set<UserRole> userRole=new HashSet<>();
+//		UserRole uRole=new UserRole();
+//		uRole.setRole(role);
+//		uRole.setUser(user);
+//		userRole.add(uRole);
+//		
+//		
+//		userDto.setUserRoles(userRole);
+//		UserModel userModel=userService.addUser(userDto, userRole);
+//		logger.info("User Added Sucessfully. {}",userModel);
 	}
 
 }

@@ -6,7 +6,7 @@ public class UrlMapping {
 		super();
 	}
 
-	public static final String BASE_URL = "api/p2/v1";
+	public static final String BASE_URL = "api/p2/v1/";
 
 	// User
 	public static final String USERS = "users";
