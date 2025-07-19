@@ -37,19 +37,19 @@ public class ExamPortalApiApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		logger.info("Starting exam portal ...............");
-
-		UserDto userDto = new UserDto();
-		userDto.setFirstName("Pandurang");
-		userDto.setLastName("Shinde");
-		userDto.setUserName("pandurang");
-		userDto.setPassword("Pandurang@190");
-		userDto.setEmail("pandurang@gmail.com");
-		userDto.setPhone("7083021253");
-		userDto.setAddress("Pune");
-		Role role =commonDao.getRole();
-		UserModel userModel = userService.addUser(userDto,role);
-		logger.info("User Added Sucessfully. {}", userModel);
+//		logger.info("Starting exam portal ...............");
+//
+//		UserDto userDto = new UserDto();
+//		userDto.setFirstName("Pandurang");
+//		userDto.setLastName("Shinde");
+//		userDto.setUserName("pandurang");
+//		userDto.setPassword("Pandurang@190");
+//		userDto.setEmail("pandurang@gmail.com");
+//		userDto.setPhone("7083021253");
+//		userDto.setAddress("Pune");
+//		Role role =commonDao.getRole();
+//		UserModel userModel = userService.addUser(userDto,role);
+//		logger.info("User Added Sucessfully. {}", userModel);
 	}
 
 }

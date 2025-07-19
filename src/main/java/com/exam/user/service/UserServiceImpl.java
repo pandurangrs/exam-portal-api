@@ -62,7 +62,23 @@ public class UserServiceImpl implements UserService {
 	// get Single User
 	@Override
 	public UserModel getSingleUser(String userUuid) {
+		User user = userDao.getUserUsingId(userUuid);
+		
+		// Clean and safe role copy
+		Set<UserRole> newRoles = new HashSet<>();
+
+		for (UserRole ur : user.getUserRoles()) {
+		    UserRole cleanRole = new UserRole();
+		    cleanRole.setId(ur.getId());
+		    cleanRole.setRole(ur.getRole()); // Optionally clone Role object
+		    cleanRole.setUser(null); // Prevent recursion
+		    newRoles.add(cleanRole);
+		}
+		user.setUserRoles(newRoles);
+		
 		return mapper.convert(userDao.getUserUsingId(userUuid), UserModel.class);
+
+//		return userUsingId;
 	}
 
 	// get user List
